@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   try {
     const hfResponse = await fetch(
-      'https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct',
+      'https://router.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct',
       {
         method: 'POST',
         headers: {
@@ -48,6 +48,6 @@ export default async function handler(req, res) {
 
   } catch (e) {
     console.error('Proxy error:', e);
-    res.status(500).json({ error: 'Ошибка сервера' });
+    res.status(500).json({ error: 'Ошибка сервера', details: e.message });
   }
 }
