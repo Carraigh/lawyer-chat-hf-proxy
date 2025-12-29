@@ -22,6 +22,7 @@ export default async function handler(req, res) {
     );
 
     const data = await hfResponse.json();
+    console.log('HF Response:', data); // 👈 Логгирование ответа
 
     // Если модель "спит", Hugging Face возвращает error с estimated_time
     if (data.error && data.estimated_time) {
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
 
     if (data.error) {
       console.error('HF Error:', data);
-      return res.status(500).json({ error: 'Ошибка ИИ' });
+      return res.status(500).json({ error: 'Ошибка ИИ', details: data.error });
     }
 
     const rawAnswer = data[0]?.generated_text || '';
@@ -48,6 +49,9 @@ export default async function handler(req, res) {
 
   } catch (e) {
     console.error('Proxy error:', e);
-    res.status(500).json({ error: 'Ошибка сервера', details: e.message });
+    res.status(500).json({
+      error: 'Ошибка сервера',
+      details: e.message || e.toString()
+    });
   }
 }
