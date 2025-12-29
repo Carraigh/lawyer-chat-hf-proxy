@@ -1,0 +1,14 @@
+{
+  "name": "lawyer-chat-hf-proxy",
+  "version": "1.0.0",
+  "description": "Прокси для чата с юристом через Hugging Face (Phi-3-mini)",
+  "main": "api/chat.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  },
+  "license": "MIT"
+}
